@@ -1,28 +1,118 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="urna">
+      <Tela
+        :tela="tela"
+        :numeroVoto="numeroVoto"
+        :quantidadeNumeros="quantidadeNumeros"
+        :candidato="candidato"
+      />
+      <Teclado
+      :adicionarNumero="adicionarNumero"
+      :corrigir="corrigir"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import "@/css/global.css";
+import Teclado from "@/components/Teclado";
+import Tela from "./components/Tela.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Tela,
+    Teclado,
+  },
+  methods:{
+    adicionarNumero(numero){
+      if(this.numeroVoto.length == this.quantidadeNumeros){
+        return false;
+      }
+      this.numeroVoto += ''+numero;
+      this.verificarCandidato();
+    },
+    verificarCandidato(){
+      if(this.numeroVoto.length < this.quantidadeNumeros){
+        return false;
+      }
+      if(this.candidatos[this.tela][this.numeroVoto]){
+        this.candidato = this.candidatos[this.tela][this.numeroVoto];
+        return true
+      }
+      this.candidato = {
+        nome: 'Voto nulo',
+        partido: 'Voto nulo',
+        imagem: ''
+      }
+    },
+    corrigir(){
+      this.limpar();
+    },
+    limpar(){
+      this.candidato = {}
+      this.numeroVoto = ''
+    }
+  },
+  data() {
+    return {
+      tela: "prefeito",
+      numeroVoto: "",
+      quantidadeNumeros: 2,
+      candidato:{},
+      candidatos: {
+        prefeito: {
+          "01": {
+            nome: "Ash",
+            partido: "Pokemon",
+            imagem:
+              "https://raw.githubusercontent.com/william-costa/wdev-urna-eletronica-resources/master/images/ash.png",
+          },
+          "08": {
+            nome: "Vegeta",
+            partido: "Dragon Ball",
+            imagem:
+              "https://raw.githubusercontent.com/william-costa/wdev-urna-eletronica-resources/master/images/vegeta.png",
+          },
+        },
+        vereador: {
+          "01234": {
+            nome: "Pikachu",
+            partido: "Pokemon",
+            imagem:
+              "https://raw.githubusercontent.com/william-costa/wdev-urna-eletronica-resources/master/images/pikachu.png",
+          },
+          "08001": {
+            nome: "Goku",
+            partido: "Dragon Ball",
+            imagem:
+              "https://raw.githubusercontent.com/william-costa/wdev-urna-eletronica-resources/master/images/goku.png",
+          },
+        },
+      },
+    };
+  },
+};
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background-color: var(--background-color);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.urna {
+  width: 1000px;
+  height: 500px;
+  background-color: var(--ballot-box-background-color);
+  padding: 30px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
