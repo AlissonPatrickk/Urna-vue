@@ -98,8 +98,8 @@ export default {
     margin-top:20px;
 }
 .urna-tela-voto-imagem img{
-    width: 110px;
-    height: 150px;
+    width: 180px;
+    height: 250px;
     border:1px solid var(--dark-border-color)
 }
 .urna-tela-voto-instrucoes{

@@ -30,7 +30,7 @@
         <div class="urna-teclado-acoes">
             <button class="btn-branco">BRANCO</button>
             <button class="btn-corrige" v-on:click="corrigir()">CORRIGE</button>
-            <button class="btn-confirma">CONFIRMA</button>
+            <button class="btn-confirma" v-on:click="confirmar()">CONFIRMAR</button>
         </div>
 
     </div>
@@ -41,7 +41,8 @@ export default {
     name: 'Teclado',
     props:{
         adicionarNumero: Function,
-        corrigir: Function
+        corrigir: Function,
+        confirmar:Function
     }
 }
 </script>

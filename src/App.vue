@@ -10,6 +10,7 @@
       <Teclado
       :adicionarNumero="adicionarNumero"
       :corrigir="corrigir"
+      :confirmar="confirmar"
       />
     </div>
   </div>
@@ -54,6 +55,19 @@ export default {
     limpar(){
       this.candidato = {}
       this.numeroVoto = ''
+    },
+    confirmar(){
+      if(this.numeroVoto.length < this.quantidadeNumeros){
+        return false;
+      }
+      return this.avancarTela();
+    },
+    avancarTela(){
+      if(this.tela == 'prefeito'){
+        this.tela = 'verador';
+        this.quantidadeNumeros = 5;
+        return this.limpar();
+      }
     }
   },
   data() {
