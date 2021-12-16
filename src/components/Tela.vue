@@ -33,9 +33,10 @@
           <p>LARANJA para CORRIGIR</p>
           <p>VERDE para CONFIRMAR</p>
       </div>
-
-      <div v-if="tela == 'fim'" class="urna-tela-fim">finalização</div>
     </div>
+      <div v-if="tela === 'fim'" class="urna-tela-fim">
+        FIM
+      </div>
   </div>
 </template>
 
@@ -47,7 +48,6 @@ export default {
     numeroVoto: String,
     quantidadeNumeros: Number,
     candidato: Object,
-  
   },
 };
 </script>
@@ -98,8 +98,8 @@ export default {
     margin-top:20px;
 }
 .urna-tela-voto-imagem img{
-    width: 180px;
-    height: 250px;
+    width: 120px;
+    height: 150px;
     border:1px solid var(--dark-border-color)
 }
 .urna-tela-voto-instrucoes{
@@ -108,5 +108,13 @@ export default {
     font-size: 13px;
     margin-top: 20px;
     padding-top: 10px;
+}
+.urna-tela-fim{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 120px;
+  widows: 100%;
+  height: 100%;
 }
 </style>
